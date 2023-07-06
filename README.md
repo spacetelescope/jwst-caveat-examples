@@ -1,6 +1,6 @@
 # JWST Pipeline Caveat Notebooks
 
-The repository contains notebooks intended to aid the community in mitigating issues that affect, or recently affected, data products available in the MAST archive.
+The repository contains notebooks or scripts intended to aid the community in mitigating issues that affect, or recently affected, data products available in the MAST archive.
 
 Please direct all questions and comments about the information contained within to the [JWST Help Desk](https://jwsthelp.stsci.edu).
 
