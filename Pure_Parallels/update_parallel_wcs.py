@@ -1,15 +1,18 @@
-import os, sys
+import os
+import sys
 import shutil
 import glob
+import time
 from astropy.io import ascii
 import astropy.io.fits as pyfits
 import numpy as np
+import pysiaf    
+import mastquery.jwst as jwstquery
 
 def log_comment(LOGFILE, comment, verbose=False, show_date=False, mode='a'):
     """
     Log a message to a file, optionally including a date tag
     """
-    import time
 
     if show_date:
         msg = '# ({0})\n'.format(nowtime())
@@ -59,8 +62,6 @@ def update_pure_parallel_wcs(file, logfile="pure_parallel_wcs_logfile",
         Returns None if some problem is found 
     
     """
-    import pysiaf    
-    import mastquery.jwst as jwstquery
     
     if not os.path.exists(file):
         msg = "PureParallelUtils.update_pure_parallel_wcs: "
