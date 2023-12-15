@@ -16,18 +16,19 @@ It takes a few weeks to integrate a new calibration pipeline build into a full S
 
 ## Deprecation of Notebooks
 
-If JWST DMS infrastructure has been updated, and the workarounds in a specific notebook are no longer neccessary or recommended, then the notebook will be deprecated. The process for deprecating a notebook includes the following:
+Once JWST DMS infrastructure has been updated, and the workarounds in a specific notebook are no longer neccessary or recommended, then the notebook will be deprecated. The process for deprecating a notebook includes the following:
 
-*  Ensure that any DMS software or reference file updates have been released publicly
-*  Update the notebook to include a new cell at the top of the notebook which contains:
-    * A sentence in large font explaining that the workaround is no longer needed and the notebook is deprecated
-    * The calibration software version that contains the fix
-    * The CRDS context that should be used
-    * A timeline that reprocessing will occur that will update the files in the JWST Archive
- 
+*  Determine what calibration software version and CRDS context mitigated the issue worked around in the notebook
+*  Determine the DATE when DMS operations first began generating data products that no longer require the workaround described in the notebook
+*  Insert a new cell at th etop of the notebook with a deprecation comment in a large font. The default deprecation comment is the following:
+
+
+>This notebook is deprecated. Data products generated with calibration software version x.y.z or later, and CRDS context jwst_xxxx.pmap or later, no longer require this workaround. Data products in MAST created after DATE no longer require this workaround. To check creation dates for files in MAST, substitute your program ID for 2288 at the end of this URL:
+>
+>https://mast.stsci.edu/search/ui/#/jwst/results?select_cols=fileSetName,dataset,cal_ver,crds_ctx,date&program_id=2288
+
 
 *  Submit a PR that includes the updated files
-*  Make sure that the JDOX table and information has been updated appropriately
-*  After PR acceptance, the notebook should stay available for a period of 1 month, or until after reprocessing in the Archive as completed,  so that folks can still view it easily 
-    * After the specified time, create and submit a PR that removes the notebook from the repository
+*  Make sure that the JDOX Known Issues table entry has been updated appropriately
+*  After all affected products in MAST have been reprocessed, or after 3 months, whichever is longer, submit a PR that removes the notebook from the repository
 
