@@ -20,7 +20,7 @@ Once JWST DMS infrastructure has been updated, and the workarounds in a specific
 
 *  Determine what calibration software version and CRDS context mitigated the issue worked around in the notebook
 *  Determine the DATE when DMS operations first began generating data products that no longer require the workaround described in the notebook
-*  Insert a new cell at th etop of the notebook with a deprecation comment in a large font. The default deprecation comment is the following:
+*  Insert a new cell at the top of the notebook with a deprecation comment in a large font. The default deprecation comment is the following:
 
 
 >This notebook is deprecated. Data products generated with calibration software version x.y.z or later, and CRDS context jwst_xxxx.pmap or later, no longer require this workaround. Data products in MAST created after DATE no longer require this workaround. To check creation dates for files in MAST, substitute your program ID for 2288 at the end of this URL:
@@ -30,5 +30,9 @@ Once JWST DMS infrastructure has been updated, and the workarounds in a specific
 
 *  Submit a PR that includes the updated files
 *  Make sure that the JDOX Known Issues table entry has been updated appropriately
-*  After all affected products in MAST have been reprocessed, or after 3 months, whichever is longer, submit a PR that removes the notebook from the repository
+*  Make sure that any related calibration pipeline documentation has been updated
+*  After all affected products in MAST have been reprocessed, or after 3 months, whichever is 
+longer, submit a PR that removes the notebook from the repository
+*  Review any files being deprecated to assess whether an updated copy of the notebook should be submitted to the JDAT repository for long term use and maintenance.  See https://github.com/spacetelescope/jdat_notebooks
+
 
