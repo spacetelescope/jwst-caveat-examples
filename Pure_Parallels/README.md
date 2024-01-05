@@ -22,3 +22,5 @@ The script keeps track of its executions using a log file called "pure_parallel_
 ## Dependencies
 
 The script mentioned above has external dependencies. It requires the packages astropy, mastquery, numpy, and pysiaf to be installed. The script assumes that an environment with the packages mentioned above has been installed on your machine and that you have loaded into that environment.
+
+-- Paul Goudfrooij
