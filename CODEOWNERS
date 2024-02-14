@@ -1,0 +1,15 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence
+*   @sosey
+
+/general_issues/ @sosey
+
+# Order is important; the last matching pattern takes the most
+# precedence.
+/MIRI/   @skendrew
+/NIRCam_grism_time_series/  @bhilbert4
+/NIRISS_SOSS/   @Rplesha    @tbainesUA
+/NIRSPEC_Fixed_Slit/    @melanieclarke  @PatrickOgle
+/NIRSPEC_General/   @melanieclarke  @PatrickOgle
+/NIRSPEC_IFU/   @melanieclarke  @PatrickOgle
+/NIRSPEC_MOS/   @melanieclarke  @PatrickOgle
