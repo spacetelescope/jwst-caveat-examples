@@ -7,6 +7,7 @@
 # Order is important; the last matching pattern takes the most
 # precedence.
 /MIRI/   @skendrew
+/Pure_Parallels/  @goudfroo @Rplesha
 /NIRCam_grism_time_series/  @bhilbert4
 /NIRISS_SOSS/   @Rplesha    @tbainesUA
 /NIRSPEC_Fixed_Slit/    @melanieclarke  @PatrickOgle
