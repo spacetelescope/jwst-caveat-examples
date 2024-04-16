@@ -33,6 +33,6 @@ Once JWST DMS infrastructure has been updated, and the workarounds in a specific
 *  Make sure that any related calibration pipeline documentation has been updated
 *  After all affected products in MAST have been reprocessed, or after 3 months, whichever is 
 longer, submit a PR that removes the notebook from the repository
-*  Review any files being deprecated to assess whether an updated copy of the notebook should be submitted to the JDAT repository for long term use and maintenance.  See https://github.com/spacetelescope/jdat_notebooks
+*  Review any files being deprecated to assess whether an updated copy of the notebook should be submitted to the JDAT (https://github.com/spacetelescope/jdat_notebooks)  or JWST-PIPELINE-NOTEBOOKS (https://github.com/spacetelescope/jwst-pipeline-notebooks)  repository for long term use and maintenance.
 
 
