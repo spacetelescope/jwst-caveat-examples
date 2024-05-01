@@ -13,6 +13,10 @@ It takes a few weeks to integrate a new calibration pipeline build into a full S
 
 [The software vs DMS build table in the JWST pipeline repository](https://github.com/spacetelescope/jwst) indicates when jwst builds were released, which reference data (CRDS) context they were tested with, and when the was first used in S&OC operations. Some JWST releases (particularly S&OC release candidates) are never installed in operations. That page also provides detailed instructions on how to create a fresh conda environment, install the version of the pipeline you would like to use, and how to configure the CRDS environment that is appropriate for that release.
 
+## Notebook Acceptance and Review
+
+Notebooks included in this repository have been prepared by the JWST Instrument Calibration Teams themselves. As part of their acceptence, they go through a simple technical review for correctess of content and operation. This review is repeated by the teams during DMS build deliveries to ensure no additional content updates are needed or to prepare to deprecate the notebook. 
+
 
 ## Deprecation of Notebooks
 
@@ -29,7 +33,7 @@ Once JWST DMS infrastructure has been updated, and the workarounds in a specific
 
 
 *  Submit a PR that includes the updated files
-*  Make sure that the JDOX Known Issues table entry has been updated appropriately
+*  Make sure that the [JDOX Known Issues](https://jwst-docs.stsci.edu/known-issues-with-jwst-data/known-issues-with-jwst-data-high-level-summary#gsc.tab=0) table entry has been updated appropriately
 *  Make sure that any related calibration pipeline documentation has been updated
 *  After all affected products in MAST have been reprocessed, or after 3 months, whichever is 
 longer, submit a PR that removes the notebook from the repository
