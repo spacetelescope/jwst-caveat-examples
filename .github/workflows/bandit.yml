@@ -31,6 +31,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ vars.PYTHON_VERSION }}
+
       - name: Get changed notebooks
         id: get-changed-notebooks
         uses: tj-actions/changed-files@v44.5.5
@@ -39,12 +44,6 @@ jobs:
           safe_output: false # binding to env below
           files: |
             **/*.ipynb    
-      
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ vars.PYTHON_VERSION }}
-          cache: 'pip'
       
       - name: Install Bandit
         id: install-bandit
