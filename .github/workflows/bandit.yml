@@ -1,0 +1,80 @@
+## This runs bandit checks on all PRs and upload artifact
+## Currently set only for high severity and high criticality
+name: BanditEverything
+
+on:
+  pull_request: 
+    branches: 
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+  workflow_call:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bandit-scan:
+    runs-on: ubuntu-latest
+    env:
+      ARTIFACT_ROOT: bandit-results
+      PR_NUMBER: ${{ github.event.number }}
+    permissions:
+      # only required for workflows in private repositories, remaining set to none
+      actions: read
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get changed notebooks
+        id: get-changed-notebooks
+        uses: tj-actions/changed-files@v44.5.5
+        with:
+          separator: " " # nbconvert accepts space separated file list
+          safe_output: false # binding to env below
+          files: |
+            **/*.ipynb    
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ vars.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: Install Bandit
+        id: install-bandit
+        run: |
+          python --version
+          python -m pip install --upgrade pip
+          pip install bandit
+          echo "BANDIT_ARTIFACT=$ARTIFACT_ROOT.$PR_NUMBER.json" >> "$GITHUB_ENV"
+      
+      - name: Install nbconvert
+        if: ${{ steps.get-changed-notebooks.outputs.any_changed == 'true' }}
+        run: pip install nbconvert ipython
+      
+      - name: Convert Jupyter notebooks 
+        if: ${{ steps.get-changed-notebooks.outputs.any_changed == 'true' }}
+        env:
+          ADDED_FILES: ${{ steps.get-changed-notebooks.outputs.all_changed_files }}     
+        run: jupyter nbconvert --allow-errors --sanitize-html --to script $ADDED_FILES        
+      
+      - name: Perform Bandit Analysis
+        id: bandit-run
+        run: bandit --format json -o $BANDIT_ARTIFACT --confidence-level high  --severity-level high -r .
+      
+      - name: Upload artifact
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.BANDIT_ARTIFACT }}
+          path: ${{ env.BANDIT_ARTIFACT }}
+          overwrite: true
+          retention-days: 14
+
+

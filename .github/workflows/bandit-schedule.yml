@@ -1,0 +1,70 @@
+## This runs bandit checks on all jupyter notebooks and python files
+## on a schedule and then uploads the results so that can 
+## be seen in the security tab. It can also be run manually
+## https://tool.crontap.com/cronjob-debugger
+##
+## Current settings in this file are to look for only high severity with high confidence
+
+name: ScheduledBandit
+
+on:
+  schedule:
+    - cron: '0 1 1 * *'  # at 1am on the first day of the month  
+  
+  workflow_dispatch:  # manual run, workflow must be in default branch
+
+
+jobs:
+  bandit-scheduled-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get changed notebooks
+        id: get-changed-notebooks
+        uses: tj-actions/changed-files@v44.5.5
+        with:
+          separator: " " # nbconvert accepts space separated file list
+          safe_output: false # binding to env below
+          files: |
+            **/*.ipynb    
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ vars.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: Install Bandit
+        run: |
+          python --version
+          python -m pip install --upgrade pip
+          pip install bandit bandit-sarif-formatter
+      
+      - name: Install nbconvert
+        if: ${{ steps.get-changed-notebooks.outputs.any_changed == 'true' }}
+        run: pip install nbconvert ipython
+      
+      - name: Convert Jupyter notebooks 
+        if: ${{ steps.get-changed-notebooks.outputs.any_changed == 'true' }}
+        env:
+          ADDED_FILES: ${{ steps.get-changed-notebooks.outputs.all_changed_files }}     
+        run: jupyter nbconvert --allow-errors --sanitize-html --to script $ADDED_FILES        
+      
+      - name: Perform Bandit Analysis
+        id: bandit-run
+        run: bandit --format sarif -o results.sarif --confidence-level high  --severity-level high -r .
+      
+      - name: Upload sarif to security
+        if: ${{ failure() }}
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif-file: results.sarif
+
+

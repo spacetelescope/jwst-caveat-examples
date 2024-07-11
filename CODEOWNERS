@@ -2,7 +2,7 @@
 # the repo. Unless a later match takes precedence
 *   @sosey
 
-/general_issues/ @sosey
+/general_issues/ @sosey @drlaw1558
 
 # Order is important; the last matching pattern takes the most
 # precedence.
@@ -10,7 +10,7 @@
 /Pure_Parallels/  @goudfroo @bhilbert4
 /NIRCam_grism_time_series/  @bhilbert4
 /NIRISS_SOSS/   @Rplesha    @tbainesUA
-/NIRSPEC_Fixed_Slit/    @melanieclarke  @PatrickOgle
-/NIRSPEC_General/   @melanieclarke  @PatrickOgle
-/NIRSPEC_IFU/   @melanieclarke  @PatrickOgle
-/NIRSPEC_MOS/   @melanieclarke  @PatrickOgle
+/NIRSPEC_Fixed_Slit/    @hayescr  @PatrickOgle
+/NIRSPEC_General/   @hayescr  @PatrickOgle
+/NIRSPEC_IFU/   @hayescr  @PatrickOgle
+/NIRSPEC_MOS/   @hayescr  @PatrickOgle
