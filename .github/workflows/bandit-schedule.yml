@@ -61,10 +61,10 @@ jobs:
         id: bandit-run
         run: bandit --format sarif -o results.sarif --confidence-level high  --severity-level high -r .
       
-      - name: Upload sarif to security
+      - name: Upload sarif artifact to security
         if: ${{ failure() }}
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif-file: results.sarif
+          sarif_file: results.sarif
 
 
