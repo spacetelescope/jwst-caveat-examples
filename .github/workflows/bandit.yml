@@ -61,13 +61,14 @@ jobs:
         if: ${{ steps.get-changed-notebooks.outputs.any_changed == 'true' }}
         env:
           ADDED_FILES: ${{ steps.get-changed-notebooks.outputs.all_changed_files }}     
-        run: jupyter nbconvert --allow-errors --sanitize-html --to script $ADDED_FILES        
-      
+        run: |
+          jupyter nbconvert --allow-errors --sanitize-html --to script $ADDED_FILES        
+
       - name: Perform Bandit Analysis
         id: bandit-run
         run: bandit --format json -o $BANDIT_ARTIFACT --confidence-level high  --severity-level high -r .
       
-      - name: Upload artifact
+      - name: Upload bandit artifact for PR review
         if: ${{ failure() }}
         uses: actions/upload-artifact@v4
         with:
