@@ -24,11 +24,11 @@ jobs:
       security-events: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938  # v4.2.0
 
       - name: Get changed notebooks
         id: get-changed-notebooks
-        uses: tj-actions/changed-files@v44.5.5
+        uses: tj-actions/changed-files@48d8f15b2aaa3d255ca5af3eba4870f807ce6b3c  # v45.0.2
         with:
           separator: " " # nbconvert accepts space separated file list
           safe_output: false # binding to env below
@@ -36,7 +36,7 @@ jobs:
             **/*.ipynb    
       
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3  # v5.2.0
         with:
           python-version: ${{ vars.PYTHON_VERSION }}
           cache: 'pip'
@@ -63,7 +63,7 @@ jobs:
       
       - name: Upload sarif artifact to security
         if: ${{ failure() }}
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@5618c9fc1e675841ca52c1c6b1304f5255a905a0  # codeql-bundle-v2.19.0
         with:
           sarif_file: results.sarif
 
