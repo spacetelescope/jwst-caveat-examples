@@ -29,16 +29,16 @@ jobs:
       contents: read
     steps:
       - name: Checkout repository
-        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938  # v4.2.0
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
 
       - name: Setup Python
-        uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3  # v5.2.0
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5.3.0
         with:
           python-version: ${{ vars.PYTHON_VERSION }}
 
       - name: Get changed notebooks
         id: get-changed-notebooks
-        uses: tj-actions/changed-files@48d8f15b2aaa3d255ca5af3eba4870f807ce6b3c  # v45.0.2
+        uses: tj-actions/changed-files@4edd678ac3f81e2dc578756871e4d00c19191daf  # v45.0.4
         with:
           separator: " " # nbconvert accepts space separated file list
           safe_output: false # binding to env below
@@ -70,7 +70,7 @@ jobs:
       
       - name: Upload bandit artifact for PR review
         if: ${{ failure() }}
-        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882  # v4.4.3
         with:
           name: ${{ env.BANDIT_ARTIFACT }}
           path: ${{ env.BANDIT_ARTIFACT }}
