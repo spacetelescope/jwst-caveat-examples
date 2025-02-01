@@ -28,7 +28,7 @@ jobs:
 
       - name: Get changed notebooks
         id: get-changed-notebooks
-        uses: tj-actions/changed-files@4edd678ac3f81e2dc578756871e4d00c19191daf  # v45.0.4
+        uses: tj-actions/changed-files@d6e91a2266cdb9d62096cebf1e8546899c6aa18f  # v45.0.6
         with:
           separator: " " # nbconvert accepts space separated file list
           safe_output: false # binding to env below
@@ -36,7 +36,7 @@ jobs:
             **/*.ipynb    
       
       - name: Setup Python
-        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5.3.0
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38  # v5.4.0
         with:
           python-version: ${{ vars.PYTHON_VERSION }}
           cache: 'pip'
