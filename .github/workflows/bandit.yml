@@ -38,7 +38,7 @@ jobs:
 
       - name: Get changed notebooks
         id: get-changed-notebooks
-        uses: tj-actions/changed-files@d6e91a2266cdb9d62096cebf1e8546899c6aa18f  # v45.0.6
+        uses: tj-actions/changed-files@dcc7a0cba800f454d79fff4b993e8c3555bcc0a8  # v45.0.7
         with:
           separator: " " # nbconvert accepts space separated file list
           safe_output: false # binding to env below
@@ -70,7 +70,7 @@ jobs:
       
       - name: Upload bandit artifact for PR review
         if: ${{ failure() }}
-        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08  # v4.6.0
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1  # v4.6.1
         with:
           name: ${{ env.BANDIT_ARTIFACT }}
           path: ${{ env.BANDIT_ARTIFACT }}
